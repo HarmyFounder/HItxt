@@ -4,6 +4,7 @@ import com.HarmyFounder.HItxt.models.Comment;
 import com.HarmyFounder.HItxt.models.User;
 import com.HarmyFounder.HItxt.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,6 +19,7 @@ public class CommentController {
     private CommentService commentService;
 
     @PostMapping("/create")
+    @PreAuthorize("hasAuthority('posts:write')")
     public Comment comment(@RequestBody Comment comment, @AuthenticationPrincipal User user){
         return commentService.create(comment,user);
     }
