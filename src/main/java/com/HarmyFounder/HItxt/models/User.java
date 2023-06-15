@@ -16,6 +16,11 @@ public class User {
     private String email;
     private String gender;
 
+    @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
+    @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
+    @Enumerated(EnumType.STRING)
+    private Set<Role> roles;
+
     @ManyToMany
     @JoinTable(name = "user_subscriptions",
     joinColumns = @JoinColumn(name = "subscriber_id"),
@@ -32,22 +37,26 @@ public class User {
     @JoinColumn(name = "post_id")
     private Set<Post> favoriteList;
 
-    public Set<Post> getFavoriteList() {
-        return favoriteList;
+    public User() {
     }
 
-    public void setFavoriteList(Set<Post> favoriteList) {
-        this.favoriteList = favoriteList;
-    }
-
-    public User(String name, String userPic, String locale, String email, String gender, Set<User> subscriptions, Set<User> subscribers, Set<Post> favoriteList) {
+    public User(String name, String userPic, String locale, String email, String gender, Set<Role> roles, Set<User> subscriptions, Set<User> subscribers, Set<Post> favoriteList) {
         this.name = name;
         this.userPic = userPic;
         this.locale = locale;
         this.email = email;
         this.gender = gender;
+        this.roles = roles;
         this.subscriptions = subscriptions;
         this.subscribers = subscribers;
+        this.favoriteList = favoriteList;
+    }
+
+    public Set<Post> getFavoriteList() {
+        return favoriteList;
+    }
+
+    public void setFavoriteList(Set<Post> favoriteList) {
         this.favoriteList = favoriteList;
     }
 
@@ -67,7 +76,12 @@ public class User {
         this.subscribers = subscribers;
     }
 
-    public User() {
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 
     public String getName() {
@@ -107,14 +121,6 @@ public class User {
     }
 
     public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public User(String name, String userPic, String locale, String email, String gender) {
-        this.name = name;
-        this.userPic = userPic;
-        this.locale = locale;
-        this.email = email;
         this.gender = gender;
     }
 
