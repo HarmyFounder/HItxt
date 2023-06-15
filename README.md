@@ -13,5 +13,5 @@
 <h1>Functional</h1>
 <ol>
   <li>OAuth2 Login</li>
-  <li>Users, Posts, Comments, Subscribers, Favorite list CRUD</li>
+  <li>Users with Roles and Authorities, Posts, Comments, Subscribers, Favorite list CRUD</li>
 </ol>
