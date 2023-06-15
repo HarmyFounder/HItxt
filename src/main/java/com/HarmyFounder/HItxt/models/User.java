@@ -28,6 +28,29 @@ public class User {
     inverseJoinColumns = @JoinColumn(name = "subscriber_id"))
     private Set<User> subscribers = new HashSet<>();
 
+    @OneToMany
+    @JoinColumn(name = "post_id")
+    private Set<Post> favoriteList;
+
+    public Set<Post> getFavoriteList() {
+        return favoriteList;
+    }
+
+    public void setFavoriteList(Set<Post> favoriteList) {
+        this.favoriteList = favoriteList;
+    }
+
+    public User(String name, String userPic, String locale, String email, String gender, Set<User> subscriptions, Set<User> subscribers, Set<Post> favoriteList) {
+        this.name = name;
+        this.userPic = userPic;
+        this.locale = locale;
+        this.email = email;
+        this.gender = gender;
+        this.subscriptions = subscriptions;
+        this.subscribers = subscribers;
+        this.favoriteList = favoriteList;
+    }
+
     public Set<User> getSubscriptions() {
         return subscriptions;
     }

@@ -10,6 +10,6 @@ import java.util.Optional;
 @Repository
 public interface UserDetailRepo extends JpaRepository<User, String> {
 
-    @EntityGraph(attributePaths = {"subscriptions, subscribers"})
+    @EntityGraph(attributePaths = {"subscriptions, subscribers, favoriteList"})
     Optional<User> findById(String s);
 }

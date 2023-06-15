@@ -13,7 +13,7 @@ public class ProfileController {
     @Autowired
     private ProfileService profileService;
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public User getUser(@PathVariable("id") User user) {
         return user;
     }
@@ -28,5 +28,7 @@ public class ProfileController {
         }
 
     }
+
+
 
 }
