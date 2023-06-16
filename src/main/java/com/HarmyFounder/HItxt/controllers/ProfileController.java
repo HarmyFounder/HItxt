@@ -29,7 +29,12 @@ public class ProfileController {
         } else {
             return profileService.changeSubStatus(subscriber,channel);
         }
+    }
 
+    @PostMapping("/{id}/limit")
+    @PreAuthorize("hasAuthority('users:moderate')")
+    public User user(@PathVariable("id") User user){
+        return profileService.deleteWriteAuthority(user);
     }
 
 

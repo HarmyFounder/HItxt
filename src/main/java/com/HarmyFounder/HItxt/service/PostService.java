@@ -1,6 +1,7 @@
 package com.HarmyFounder.HItxt.service;
 
 import com.HarmyFounder.HItxt.models.Post;
+import com.HarmyFounder.HItxt.models.User;
 import com.HarmyFounder.HItxt.repos.PostRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,10 @@ public class PostService {
     }
 
     public void delete(Post post) {
+        postRepository.delete(post);
+    }
+
+    public void moderationDel(Post post, User user) {
         postRepository.delete(post);
     }
 }

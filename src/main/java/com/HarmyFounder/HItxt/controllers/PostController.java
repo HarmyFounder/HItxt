@@ -44,4 +44,10 @@ public class PostController {
         return favoriteListService.addToFavorite(post, user);
     }
 
+    @PostMapping("/{id}/mod/del")
+    @PreAuthorize("hasAuthority('posts:moderate')")
+    public void moderationDel(@PathVariable("id")Post post, @AuthenticationPrincipal User user){
+        postService.moderationDel(post,user);
+    }
+
 }
