@@ -1,9 +1,11 @@
 package com.HarmyFounder.HItxt.controllers;
 
 import com.HarmyFounder.HItxt.models.Post;
+import com.HarmyFounder.HItxt.models.PrivateCollection;
 import com.HarmyFounder.HItxt.models.User;
 import com.HarmyFounder.HItxt.service.FavoriteListService;
 import com.HarmyFounder.HItxt.service.PostService;
+import com.HarmyFounder.HItxt.service.PrivateCollectionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -18,6 +20,9 @@ public class PostController {
 
     @Autowired
     private FavoriteListService favoriteListService;
+
+    @Autowired
+    private PrivateCollectionService privateCollectionService;
 
     @PostMapping("/create")
     @PreAuthorize("hasAuthority('posts:write')")
@@ -48,6 +53,13 @@ public class PostController {
     @PreAuthorize("hasAuthority('posts:moderate')")
     public void moderationDel(@PathVariable("id")Post post, @AuthenticationPrincipal User user){
         postService.moderationDel(post,user);
+    }
+
+    @PostMapping("/{postId}/addToCollection/{privateCollectionId}")
+    public Post addToPrivateCollection(@PathVariable("post_id")Post post,
+                                       @PathVariable("privateCollectionId") PrivateCollection privateCollection,
+                                       @AuthenticationPrincipal User user){
+        return privateCollectionService.addPostToPrivateCollection(user,post,privateCollection);
     }
 
 }

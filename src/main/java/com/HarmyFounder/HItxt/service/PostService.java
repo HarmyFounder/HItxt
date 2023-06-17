@@ -15,16 +15,16 @@ public class PostService {
     @Autowired
     private PostRepository postRepository;
 
-    public List<Post> getAllPosts(){
+    public List<Post> getAllPosts() {
         return postRepository.findAll();
     }
 
-    public Post createPost(Post post){
+    public Post createPost(Post post) {
         return postRepository.save(post);
     }
 
     public Post update(Post postFromDb, Post post) {
-        BeanUtils.copyProperties(post,postFromDb,"id");
+        BeanUtils.copyProperties(post, postFromDb, "id");
         return postRepository.save(postFromDb);
     }
 

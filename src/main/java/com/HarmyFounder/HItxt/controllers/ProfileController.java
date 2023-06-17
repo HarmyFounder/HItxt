@@ -33,9 +33,10 @@ public class ProfileController {
 
     @PostMapping("/{id}/limit")
     @PreAuthorize("hasAuthority('users:moderate')")
-    public User user(@PathVariable("id") User user){
+    public User userLimit(@PathVariable("id") User user){
         return profileService.deleteWriteAuthority(user);
     }
+
 
 
 
