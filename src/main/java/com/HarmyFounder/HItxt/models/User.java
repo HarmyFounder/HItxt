@@ -3,6 +3,7 @@ package com.HarmyFounder.HItxt.models;
 import jakarta.persistence.*;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -36,6 +37,18 @@ public class User {
     @OneToMany
     @JoinColumn(name = "post_id")
     private Set<Post> favoriteList;
+
+    @OneToMany
+    @JoinColumn(name = "privateCollection_id")
+    private List<PrivateCollection> privateCollections;
+
+    public List<PrivateCollection> getPrivateCollections() {
+        return privateCollections;
+    }
+
+    public void setPrivateCollections(List<PrivateCollection> privateCollections) {
+        this.privateCollections = privateCollections;
+    }
 
     public User() {
     }
