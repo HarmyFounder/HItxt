@@ -4,7 +4,9 @@ public enum Permission {
     POSTS_READ("posts:read"),
     POSTS_WRITE("posts:write"),
     POSTS_MODERATE("posts:moderate"),
-    USERS_MODERATE("users:moderate");
+    USERS_MODERATE("users:moderate"),
+    USERS_PROMOTED("users:promoted");
+
     private String permission;
 
     Permission(String permission) {

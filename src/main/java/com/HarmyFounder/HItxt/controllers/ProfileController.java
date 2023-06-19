@@ -33,10 +33,18 @@ public class ProfileController {
 
     @PostMapping("/{id}/limit")
     @PreAuthorize("hasAuthority('users:moderate')")
-    public User user(@PathVariable("id") User user){
+    public User limitUser(@PathVariable("id") User user){
         return profileService.deleteWriteAuthority(user);
     }
 
+
+    //smth like subscription
+    @PostMapping("/{id}/getPromotion")
+    @PreAuthorize("hasAuthority('posts:read')")
+    //smth like special key after transaction
+    public User getPromoted(@PathVariable("id") User user, @RequestParam String secretKey){
+        return profileService.getPromoted(user,secretKey);
+    }
 
 
 }
