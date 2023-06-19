@@ -39,7 +39,9 @@ public class PostController {
     }
 
     @PostMapping("/{id}/addToFav")
-    @PreAuthorize("hasAuthority('posts:read')")
+    //@PreAuthorize("hasAuthority('users:read')") it will be default, but I decided to test
+    //smth like subscription system
+    @PreAuthorize("hasAuthority('users:promoted')")
     public Post addToFavorites(@PathVariable("id") Post post, @AuthenticationPrincipal User user) {
         return favoriteListService.addToFavorite(post, user);
     }

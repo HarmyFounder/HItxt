@@ -12,6 +12,8 @@ import java.util.Set;
 @Service
 public class ProfileService {
 
+    private static final String DEFAULT_CHECK_KEY = "PROMOTION_KEY";
+
     @Autowired
     private UserDetailRepo userDetailRepo;
 
@@ -40,5 +42,26 @@ public class ProfileService {
         }
 
         return userDetailRepo.save(channel);
+    }
+
+    public User getPromoted(User user, String secretKey) {
+
+        Set<Role> roles = user.getRoles();
+
+        if (secretKey.equals(DEFAULT_CHECK_KEY)) {
+            if (roles.contains(Role.ADMIN)) {
+                return user;
+            } else {
+
+                Role[] userRoles = (Role[]) roles.toArray();
+                Role currentUserRole = userRoles[userRoles.length - 1];
+
+                currentUserRole.getPermission().add(Permission.USERS_PROMOTED);
+
+                return userDetailRepo.save(user);
+            }
+        } else {
+            return user;
+        }
     }
 }
